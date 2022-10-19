@@ -1,2 +1,2 @@
-meshio[all]
-h5py
+h5py==3.7.0
+meshio[all]==5.3.4
