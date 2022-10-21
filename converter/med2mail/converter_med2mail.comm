@@ -1,0 +1,4 @@
+DEBUT();
+mesh=LIRE_MAILLAGE(UNITE=20, FORMAT=’MED’,);
+IMPR_RESU(FORMAT=’msh (or UNV or else)’,UNITE=21,RESU=_F(MAILLAGE=mesh,),);
+FIN()
