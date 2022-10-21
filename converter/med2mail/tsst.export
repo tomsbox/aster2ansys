@@ -36,9 +36,9 @@ P cpresok RESNOOK
 P only_nook 
 P facmtps 1
 P corefilesize unlimited
-F mmed /home/thomas/PycharmProjects/aster2ansys/converter/med2mail/original_fdlv111a.mail.med D 21
-F mail /home/thomas/PycharmProjects/aster2ansys/converter/med2mail/out.mail R 20
-F comm /home/thomas/PycharmProjects/aster2ansys/converter/med2mail/converter_med2mai_emptyl.comm D 1
+F comm /home/thomas/PycharmProjects/aster2ansys/converter/med2mail/converter_med2mail.comm D 1
+F mmed /home/thomas/PycharmProjects/aster2ansys/converter/med2mail/original_fdlv111a.mail.med D 20
+F mail /home/thomas/PycharmProjects/aster2ansys/converter/med2mail/out.mail R 21
 P consbtc oui
 P soumbtc oui
 P actions make_etude
