@@ -54,7 +54,7 @@ M_2 non
 option,distrib 1
 asdenot non
 serv_etude -1
-etude,fich,2,FR X
+etude,fich,2,FR F
 M_3 non
 opt_val,rep_outils _VIDE
 etude,fich,2,UL 21
@@ -91,7 +91,7 @@ etude,fich,2,serv Local
 etude,fich,0,nom ./converter_mail2med.comm
 option,exectool 1
 asverif non
-etude,fich,2,nom ./out
+etude,fich,2,nom ./out.med
 option,after_job 1
 opt_val,depart _VIDE
 opt_val,mpi_nbnoeud 1
