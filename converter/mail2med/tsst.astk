@@ -8,7 +8,7 @@ debug 0
 opt_val,cpresok RESNOOK
 surcharge,nbfic 0
 serv_fich_export -1
-path_etude /home/thomas/PycharmProjects/aster2ansys/converter/mail2med
+path_etude _VIDE
 option,rep_outils 0
 option,cpresok 1
 memoire 512
@@ -74,7 +74,7 @@ opt_val,multiple _VIDE
 opt_val,after_job _VIDE
 option,rep_mat 0
 etude,fich,0,UL 20
-etude,fich,0,nom ./original_fdlv111a.mail
+etude,fich,0,nom /home/thomas/PycharmProjects/aster2ansys/converter/mail2med/original_fdlv111a.mail
 option,exectool 1
 asverif non
 option,after_job 1
