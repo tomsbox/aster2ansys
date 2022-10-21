@@ -86,12 +86,12 @@ etude,fich,0,FR F
 opt_val,multiple _VIDE
 opt_val,after_job _VIDE
 option,rep_mat 0
-etude,fich,0,UL 20
+etude,fich,0,UL 21
 etude,fich,2,serv Local
 etude,fich,0,nom ./original_fdlv111a.mail.med
 option,exectool 1
 asverif non
-etude,fich,2,nom ./converter_med2mail_mail_same_LU.comm
+etude,fich,2,nom ./converter_med2mai_emptyl.comm
 option,after_job 1
 opt_val,depart _VIDE
 opt_val,mpi_nbnoeud 1
