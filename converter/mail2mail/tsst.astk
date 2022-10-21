@@ -1,9 +1,9 @@
 opt_val,rep_dex _VIDE
-etude,fich,2,type mmed
+etude,fich,2,type mail
 option,ORBInitRef 0
 option,nbmaxnook 1
 etude,fich,2,resultat 1
-nom_fich_export _VIDE
+nom_fich_export /home/thomas/PycharmProjects/aster2ansys/converter/mail2mail/tsst.export
 option,rep_dex 0
 etude oui
 debug 0
@@ -91,7 +91,7 @@ etude,fich,2,serv Local
 etude,fich,0,nom ./converter_mail2mail.comm
 option,exectool 1
 asverif non
-etude,fich,2,nom ./out.mail
+etude,fich,2,nom ./out2.mail
 option,after_job 1
 opt_val,depart _VIDE
 opt_val,mpi_nbnoeud 1

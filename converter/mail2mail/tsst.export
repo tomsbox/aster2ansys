@@ -38,7 +38,7 @@ P facmtps 1
 P corefilesize unlimited
 F comm /home/thomas/PycharmProjects/aster2ansys/converter/mail2mail/converter_mail2mail.comm D 1
 F mail /home/thomas/PycharmProjects/aster2ansys/converter/mail2mail/original_fdlv111a.mail D 20
-F mmed /home/thomas/PycharmProjects/aster2ansys/converter/mail2mail/out.mail R 20
+F mail /home/thomas/PycharmProjects/aster2ansys/converter/mail2mail/out2.mail R 20
 P consbtc oui
 P soumbtc oui
 P actions make_etude
