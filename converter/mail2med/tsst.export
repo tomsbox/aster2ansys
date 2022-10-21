@@ -38,7 +38,7 @@ P facmtps 1
 P corefilesize unlimited
 F comm /home/thomas/PycharmProjects/aster2ansys/converter/mail2med/converter_mail2med.comm D 1
 F mail /home/thomas/PycharmProjects/aster2ansys/converter/mail2med/original_fdlv111a.mail D 20
-F mmed /home/thomas/PycharmProjects/aster2ansys/converter/mail2med/out.med R 21
+F mmed /home/thomas/PycharmProjects/aster2ansys/converter/mail2med/out R 21
 P consbtc oui
 P soumbtc oui
 P actions make_etude
