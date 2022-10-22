@@ -130,5 +130,11 @@
         N46        N51       N54
  FINSF
 
+ TRIA6
+ M26        N3        N2        N6       N22       N24        N28
+ M27        N5        N3        N6       N27       N28        N38
+ M28        N1        N3        N5       N18       N27        N19
+ M29        N6        N2        N4       N24       N23        N34
+ FINSF
 
  FIN
