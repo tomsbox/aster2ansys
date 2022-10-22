@@ -138,7 +138,7 @@
  FINSF
 
  GROUP_MA name = tsst
-    M26 M29
+ M26        M27        M29
  FINSF
 
  FIN
