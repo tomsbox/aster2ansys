@@ -33,14 +33,22 @@
  FINSF
  %
  HEXA8
- M1        N1       N22       N24       N26        N2      N23       N25       N27
- M2        N1       N26       N24       N22        N3      N4        N5        N6
- M3        N1       N18       N20       N22        N2      N19       N21       N23
- M4        N1       N22       N20       N18        N3      N6        N7        N8
- M5        N1       N26       N14       N12        N2      N27       N15       N13
- M6        N1       N12       N14       N26        N3      N10       N11       N 4
- M7        N1       N12       N16       N18        N2      N13       N17       N19
- M8        N1       N18       N16       N12        N3      N8        N9        N10
+ M1        N1       N22       N24       N26        N2      N23       N25
+            N27
+ M2        N1       N26       N24       N22        N3      N4        N5
+            N6
+ M3        N1       N18       N20       N22        N2      N19       N21
+            N23
+ M4        N1       N22       N20       N18        N3      N6        N7
+            N8
+ M5        N1       N26       N14       N12        N2      N27       N15
+            N13
+ M6        N1       N12       N14       N26        N3      N10       N11
+            N4
+ M7        N1       N12       N16       N18        N2      N13       N17
+            N19
+ M8        N1       N18       N16       N12        N3      N8        N9
+            N10
  FINSF
  %
  FIN
