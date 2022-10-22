@@ -137,4 +137,8 @@
  M29        N6        N2        N4       N24       N23        N34
  FINSF
 
+ GROUP_MA name = tsst
+    M26 M29
+ FINSF
+
  FIN
