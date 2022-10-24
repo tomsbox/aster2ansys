@@ -1,5 +1,0 @@
-F comm calculate_pressure.comm D    1
-F mmed Klotz_for_aster_TET10_made_by_hand.mail.med D    20
-F mess calculate_pressure.mess R    6
-F mess calculate_pressure.resu R    8
-F rmed calculate_pressure.resu R    80
