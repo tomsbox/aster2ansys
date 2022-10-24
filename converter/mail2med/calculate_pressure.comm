@@ -1,6 +1,6 @@
 DEBUT(LANG='EN')
 
-mesh = LIRE_MAILLAGE(FORMAT='MED', )
+mesh = LIRE_MAILLAGE(FORMAT='MED', UNITE=20)
 
 model = AFFE_MODELE(MAILLAGE=mesh,
                     AFFE=_F(MODELISATION=('3D',),
@@ -9,8 +9,7 @@ model = AFFE_MODELE(MAILLAGE=mesh,
                             ),
                     )
 
-steel = DEFI_MATERIAU(identifier='3:1',
-                      ELAS=_F(E=200000.0,
+steel = DEFI_MATERIAU(ELAS=_F(E=200000.0,
                               NU=0.2,
                               RHO=7.8e-09
                               )
@@ -34,7 +33,8 @@ load = AFFE_CHAR_MECA(MODELE=model,
                       ),
                       )
 
-reslin = MECA_STATIQUE(CHAM_MATER=fieldmat,
+reslin = MECA_STATIQUE(SOLVEUR=_F(METHODE='MULT_FRONT'),
+                       CHAM_MATER=fieldmat,
                        EXCIT=_F(CHARGE=load),
                        MODELE=model)
 
@@ -49,6 +49,7 @@ IMPR_RESU(FORMAT='MED',
               NOM_CHAM=('SIEQ_NOEU',),
               RESULTAT=reslin
           ),
+          UNITE=80
           )
 
 FIN()
