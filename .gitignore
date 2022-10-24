@@ -1,2 +1,8 @@
 .idea
 .venv
+/docker_volume/druckbauteil.comm
+/docker_volume/druckbauteil.export
+/docker_volume/druckbauteil.med
+/docker_volume/druckbauteil.mess
+/docker_volume/druckbauteil.resu
+/docker_volume/druckbauteil.rmed
