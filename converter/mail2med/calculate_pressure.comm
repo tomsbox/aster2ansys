@@ -1,0 +1,54 @@
+DEBUT(LANG='EN')
+
+mesh = LIRE_MAILLAGE(FORMAT='MED', )
+
+model = AFFE_MODELE(MAILLAGE=mesh,
+                    AFFE=_F(MODELISATION=('3D',),
+                            PHENOMENE='MECANIQUE',
+                            TOUT='OUI'
+                            ),
+                    )
+
+steel = DEFI_MATERIAU(identifier='3:1',
+                      ELAS=_F(E=200000.0,
+                              NU=0.2,
+                              RHO=7.8e-09
+                              )
+                      )
+
+fieldmat = AFFE_MATERIAU(AFFE=_F(MATER=(steel,),
+                                 TOUT='OUI'
+                                 ),
+                         MODELE=model
+                         )
+
+load = AFFE_CHAR_MECA(MODELE=model,
+                      DDL_IMPO=_F(DX=0.0,
+                                  DY=0.0,
+                                  DZ=0.0,
+                                  GROUP_NO=('fixed',)
+                                  ),
+                      PRES_REP=_F(
+                          GROUP_MA('pressure', ),
+                          PRESS=8,
+                      ),
+                      )
+
+reslin = MECA_STATIQUE(CHAM_MATER=fieldmat,
+                       EXCIT=_F(CHARGE=load),
+                       MODELE=model)
+
+reslin = CALC_CHAMP(reuse=reslin,
+                    RESULTAT=reslin,
+                    CONTRAINTE=('SIGM_NOEU',),
+                    CRITERES=('SIEQ_NOEU',),
+                    )
+
+IMPR_RESU(FORMAT='MED',
+          RESU=_F(
+              NOM_CHAM=('SIEQ_NOEU',),
+              RESULTAT=reslin
+          ),
+          )
+
+FIN()

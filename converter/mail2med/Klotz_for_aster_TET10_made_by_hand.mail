@@ -138,8 +138,15 @@
  FINSF
 
  GROUP_MA
-   tsst
+   pressure
  M26        M27        M29
+ FINSF
+
+ GROUP_NO
+   fixed
+ N7 N12 N11 N47 N57
+ N45 N52 N61 N59 N58
+ N9 N14 N13 N53 N64
  FINSF
 
  FIN
