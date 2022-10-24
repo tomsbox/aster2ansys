@@ -1,6 +1,6 @@
 DEBUT(LANG='EN')
 
-mesh = LIRE_MAILLAGE(FORMAT='MfghgfhgfED', UNITE=20)
+mesh = LIRE_MAILLAGE(FORMAT='MED', UNITE=20)
 
 model = AFFE_MODELE(MAILLAGE=mesh,
                     AFFE=_F(MODELISATION=('3D',),
