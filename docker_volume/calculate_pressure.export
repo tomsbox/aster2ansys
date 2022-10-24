@@ -15,4 +15,4 @@ F comm /home/aster/shared/calculate_pressure.comm D  1
 F mmed /home/aster/shared/Klotz_for_aster_TET10_made_by_hand.mail.med D  20
 F mess /home/aster/shared/calculate_pressure.mess R  6
 F mess /home/aster/shared/calculate_pressure.resu R  8
-F rmed /home/aster/shared/calculate_pressure.resu R  80
+F rmed /home/aster/shared/calculate_pressure.rmed R  80
