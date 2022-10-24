@@ -70,7 +70,7 @@ FIN()
                    révision 9aa55c3f2e9e - branche 'default'                    
                          Copyright EDF R&D 1991 - 2022                          
                                                                                 
-                    Exécution du : Mon Oct 24 12:00:52 2022                     
+                    Exécution du : Mon Oct 24 12:03:59 2022                     
                         Nom de la machine : f65e93666cac                        
                               Architecture : 64bit                              
                           Type de processeur : x86_64                           
@@ -167,9 +167,9 @@ Système d'exploitation : Linux-5.10.102.1-microsoft-standard-WSL2-x86_64-with-U
 
   Relecture des catalogues des éléments faite.
 
-  Fin de lecture (durée  0.061494  s.) 
+  Fin de lecture (durée  0.024253  s.) 
   # Mémoire (Mo) :   278.20 /   270.34 /    48.27 /    26.90 (VmPeak / VmSize / Optimum / Minimum)
-  # Fin commande No : 0001   user+syst:        0.07s (syst:        0.07s, elaps:        0.08s)
+  # Fin commande No : 0001   user+syst:        0.04s (syst:        0.02s, elaps:        0.04s)
   # ------------------------------------------------------------------------------------------
 
 .. __stg1_txt3
@@ -204,7 +204,7 @@ NOMBRE DE GROUPES DE MAILLES               1
 --------------------------------------------------------------------------------
 
   # Mémoire (Mo) :   278.20 /   271.25 /    48.27 /    26.90 (VmPeak / VmSize / Optimum / Minimum)
-  # Fin commande No : 0002   user+syst:        0.02s (syst:        0.01s, elaps:        0.01s)
+  # Fin commande No : 0002   user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)
   # ------------------------------------------------------------------------------------------
 
 .. __stg1_txt8
@@ -227,7 +227,7 @@ Sur les 29 mailles du maillage mesh, on a demandé l'affectation de 29, on a pu 
  3D               TETRA10      MECA_TETRA10     25
 #2      Calculs elementaires et assemblages               CPU (USER+SYST/SYST/ELAPS):      0.00      0.00      0.00
   # Mémoire (Mo) :   304.16 /   304.16 /    48.27 /    37.97 (VmPeak / VmSize / Optimum / Minimum)
-  # Fin commande No : 0004   user+syst:        0.00s (syst:        0.00s, elaps:        0.00s)
+  # Fin commande No : 0004   user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)
   # ------------------------------------------------------------------------------------------
 
 .. __stg1_txt14
@@ -242,7 +242,7 @@ Sur les 29 mailles du maillage mesh, on a demandé l'affectation de 29, on a pu 
 
 Propriétés définies dans le matériau: ELAS.
   # Mémoire (Mo) :   304.16 /   304.16 /    48.27 /    37.97 (VmPeak / VmSize / Optimum / Minimum)
-  # Fin commande No : 0005   user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)
+  # Fin commande No : 0005   user+syst:        0.00s (syst:        0.00s, elaps:        0.00s)
   # ------------------------------------------------------------------------------------------
 
 .. __stg1_txt21
@@ -320,7 +320,7 @@ Propriétés définies dans le matériau: ELAS.
                       CRITERE='RELATIF',
                       INFO=1,)
 
-#2      Calculs elementaires et assemblages               CPU (USER+SYST/SYST/ELAPS):      0.00      0.00      0.00
+#2      Calculs elementaires et assemblages               CPU (USER+SYST/SYST/ELAPS):      0.01      0.00      0.00
   # Mémoire (Mo) :   308.66 /   308.20 /    48.27 /    38.04 (VmPeak / VmSize / Optimum / Minimum)
   # Fin commande No : 0009   user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)
   # ------------------------------------------------------------------------------------------
@@ -485,41 +485,41 @@ Création du fichier au format MED 3.3.1.
      - COMPREND LA MEMOIRE CONSOMMEE PAR  JEVEUX, 
        LE SUPERVISEUR PYTHON, LES LIBRAIRIES EXTERNES
   
- <I>       FIN D'EXECUTION LE : LU-24-OCTO-2022 12:00:52
+ <I>       FIN D'EXECUTION LE : LU-24-OCTO-2022 12:03:59
 
 
   <I> Informations sur les temps d'exécution
-      Temps cpu user total                    0.29 s
-      Temps cpu systeme total                 0.15 s
-      Temps elapsed total                     0.45 s
-      Temps restant                       35099.55 s
+      Temps cpu user total                    0.32 s
+      Temps cpu systeme total                 0.08 s
+      Temps elapsed total                     0.41 s
+      Temps restant                       35099.59 s
 
 
   La signature de la base sauvegardée est (à l'adresse 0) :
-    b66ab0ea2e9ff3be992ac3e3457596735e69fcd1
+    4788f6625be740e0f7e1a41e8d29148074fd5bf2
 
  ********************************************************************************
  * COMMAND                  :       USER :     SYSTEM :   USER+SYS :    ELAPSED *
  ********************************************************************************
- * init (jdc)               :       0.20 :       0.05 :       0.25 :       0.25 *
+ * init (jdc)               :       0.22 :       0.03 :       0.25 :       0.26 *
  *  . compile               :       0.00 :       0.00 :       0.00 :       0.01 *
- *  . exec_compile          :       0.04 :       0.00 :       0.04 :       0.05 *
- *  . report                :       0.01 :       0.01 :       0.02 :       0.00 *
+ *  . exec_compile          :       0.04 :       0.01 :       0.05 :       0.04 *
+ *  . report                :       0.00 :       0.00 :       0.00 :       0.01 *
  *  . build                 :       0.00 :       0.00 :       0.00 :       0.00 *
- * DEBUT                    :       0.00 :       0.07 :       0.07 :       0.08 *
- * LIRE_MAILLAGE            :       0.01 :       0.01 :       0.02 :       0.01 *
- * AFFE_MODELE              :       0.00 :       0.00 :       0.00 :       0.00 *
- * DEFI_MATERIAU            :       0.01 :       0.00 :       0.01 :       0.01 *
+ * DEBUT                    :       0.02 :       0.02 :       0.04 :       0.04 *
+ * LIRE_MAILLAGE            :       0.01 :       0.00 :       0.01 :       0.01 *
+ * AFFE_MODELE              :       0.01 :       0.00 :       0.01 :       0.01 *
+ * DEFI_MATERIAU            :       0.00 :       0.00 :       0.00 :       0.00 *
  * AFFE_MATERIAU            :       0.00 :       0.00 :       0.00 :       0.00 *
  * AFFE_CHAR_MECA           :       0.01 :       0.00 :       0.01 :       0.01 *
  * MECA_STATIQUE            :       0.01 :       0.00 :       0.01 :       0.01 *
  * CALC_CHAMP               :       0.01 :       0.00 :       0.01 :       0.01 *
  * IMPR_RESU                :       0.01 :       0.00 :       0.01 :       0.01 *
- * FIN                      :       0.03 :       0.02 :       0.05 :       0.05 *
- *  . part Superviseur      :       0.21 :       0.12 :       0.33 :       0.36 *
- *  . part Fortran          :       0.09 :       0.03 :       0.12 :       0.10 *
+ * FIN                      :       0.02 :       0.03 :       0.05 :       0.05 *
+ *  . part Superviseur      :       0.26 :       0.05 :       0.31 :       0.32 *
+ *  . part Fortran          :       0.07 :       0.03 :       0.10 :       0.10 *
  ********************************************************************************
- * TOTAL_JOB                :       0.29 :       0.15 :       0.44 :       0.45 *
+ * TOTAL_JOB                :       0.32 :       0.08 :       0.40 :       0.41 *
  ********************************************************************************
 
-EXECUTION_CODE_ASTER_EXIT_353=0
+EXECUTION_CODE_ASTER_EXIT_428=0
