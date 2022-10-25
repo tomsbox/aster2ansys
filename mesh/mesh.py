@@ -1,6 +1,14 @@
 from pathlib import Path
 
 
+def aster_node_line(line):
+    number = line.split()[0]
+    x_coordinate = line.split()[1]
+    y_coordinate = line.split()[2]
+    z_coordinate = line.split()[3]
+    return " " + "N" + number + "   " + x_coordinate + "    " + y_coordinate + "    " + z_coordinate
+
+
 class Mesh:
 
     # _mesh_reader=
@@ -32,7 +40,7 @@ class Mesh:
 
         for index, line in enumerate(self.lines):
             if index >= index_start_line_nodes and index <= index_end_line_nodes:
-                self.nodes.append(line)
+                self.nodes.append(aster_node_line(line))
 
         print(f"index_start_line_nodes: {index_start_line_nodes}")
         print(f"index_end_line_nodes: {index_end_line_nodes}")
@@ -40,4 +48,5 @@ class Mesh:
     def write_nodes(self):
         with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "w") as file:
             for node in self.nodes:
-                file.write(node)
+                file.writelines(node + "\n")
+
