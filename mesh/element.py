@@ -17,4 +17,4 @@ class Element:
     def get_element_definition(self):
         return " " + "M" + self._number + "   N" + self._node_01 + "    N" + self._node_02 + "    N" + self._node_03 + \
                "    N" + self._node_04 + "    N" + self._node_05 + "    N" + self._node_06 + "    N" + self._node_07 + \
-               "    N" + self._node_08 + "\n" "    N" + self._node_09 + "    N" + self._node_10
+               "\n" + "    N" + self._node_08 + "    N" + self._node_09 + "    N" + self._node_10
