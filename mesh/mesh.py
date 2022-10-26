@@ -1,31 +1,6 @@
 from pathlib import Path
-
-
-def get_node_line_as_aster_mail(line):
-    number = line.split()[0]
-    x_coordinate = line.split()[1]
-    y_coordinate = line.split()[2]
-    z_coordinate = line.split()[3]
-    return " " + "N" + number + "   " + x_coordinate + "    " + y_coordinate + "    " + z_coordinate
-
-
-def get_element_line_as_aster_mail_TET10(line):
-    try:
-        number = line.split()[10]
-        node_1 = line.split()[11]
-        node_2 = line.split()[12]
-        node_3 = line.split()[13]
-        node_4 = line.split()[14]
-        node_5 = line.split()[15]
-        node_6 = line.split()[16]
-        node_7 = line.split()[17]
-        node_8 = line.split()[18]
-
-        return " " + "M" + number + "   N" + node_1 + "    N" + node_2 + "    N" + node_3 + "    N" + node_4 + "    N" + node_5 + "    N" + node_6 + "    N" + node_7 + "    N" + node_8
-    except IndexError:
-        node_9 = line.split()[0]
-        node_10 = line.split()[1]
-        return "    N" + node_9 + "    N" + node_10
+from .node import Node
+from .element import Element
 
 
 class Mesh:
@@ -61,7 +36,8 @@ class Mesh:
 
         for index, line in enumerate(self.lines):
             if index >= index_start_line_nodes and index <= index_end_line_nodes:
-                self.nodes.append(line)
+                node_info = line.split()
+                self.nodes.append(Node(node_info[0], node_info[1], node_info[2], node_info[3]))
 
         print(f"index_start_line_nodes: {index_start_line_nodes}")
         print(f"index_end_line_nodes: {index_end_line_nodes}")
@@ -69,7 +45,7 @@ class Mesh:
     def write_nodes(self):
         with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
             for node in self.nodes:
-                file.writelines(get_node_line_as_aster_mail(node) + "\n")
+                file.writelines(node.get_node_definition() + "\n")
 
     def read_elements(self):
         index_start_line_elements = None
@@ -85,8 +61,29 @@ class Mesh:
                 break
 
         for index, line in enumerate(self.lines):
-            if index >= index_start_line_elements and index <= index_end_line_elements:
-                self.elements.append(line)
+
+            if index >= index_start_line_elements and index <= index_end_line_elements and index % 2 == 1:
+                element_info_line_1 = self.lines[index].split()
+                print(f"element_info_line_1: {element_info_line_1}")
+                element_info_line_2 = self.lines[index + 1].split()
+                print(f"element_info_line_2: {element_info_line_2}")
+
+                number = element_info_line_1[10]
+                node_01 = element_info_line_1[11]
+                node_02 = element_info_line_1[12]
+                node_03 = element_info_line_1[13]
+                node_04 = element_info_line_1[14]
+                node_05 = element_info_line_1[15]
+                node_06 = element_info_line_1[16]
+                node_07 = element_info_line_1[17]
+                node_08 = element_info_line_1[18]
+
+                node_09 = element_info_line_2[0]
+                node_10 = element_info_line_2[1]
+
+                self.elements.append(Element(number=number, node_01=node_01, node_02=node_02, node_03=node_03,
+                                             node_04=node_04, node_05=node_05, node_06=node_06, node_07=node_07,
+                                             node_08=node_08, node_09=node_09, node_10=node_10))
 
         print(f"index_start_line_nodes: {index_start_line_elements}")
         print(f"index_end_line_nodes: {index_end_line_elements}")
@@ -95,4 +92,4 @@ class Mesh:
         with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
             for element in self.elements:
                 print(f"element: {element}")
-                file.writelines(get_element_line_as_aster_mail_TET10(element) + "\n")
+                file.writelines(element.get_element_definition() + "\n")
