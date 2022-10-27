@@ -187,6 +187,7 @@ class Mesh:
     def write_set_node(self):
         with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
             for set_node in self.set_nodes:
+                file.writelines(" " + set_node.get_node_set()["name"] + "\n")
                 file.writelines(" ")
                 for index, item in enumerate(set_node.get_node_set()["nodes"]):
                     file.writelines("N" + str(item) + "   ")
