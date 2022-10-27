@@ -10,7 +10,7 @@ class MeshTest(unittest.TestCase):
         print(f"current_path: {current_path}")
         print(f"oooooooooooooooooooooo")
         file = current_path / "example_files/ansys_mesh/Klotz_for_aster_TET10.dat"
-        mesh = Mesh(file, "out.mail")
+        mesh = Mesh(file, "Klotz_for_aster_TET10.mail")
         mesh.write_header()
         mesh.write_nodes()
         mesh.write_elements()
