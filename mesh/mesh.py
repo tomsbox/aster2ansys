@@ -60,7 +60,7 @@ class Mesh:
         for index, line in enumerate(self.lines):
             if "eblock" in line:
                 index_of_start_lines_with_first_element_of_element_blocks.append(index + 2)
-                print(f"line: {line}")
+                #print(f"line: {line}")
 
             if line[0:2] == "-1" and len(index_of_start_lines_with_first_element_of_element_blocks) > 0:
                 index_of_end_lines_with_last_element_of_element_blocks.append(index - 1)
@@ -82,29 +82,33 @@ class Mesh:
             if int(element_type) == 187:
                 print("TET10")
                 for index, line in enumerate(self.lines):
-                    if index_of_start_lines_with_first_element_of_element_blocks[index_of_startline] <= index <= \
-                            index_of_end_lines_with_last_element_of_element_blocks[
-                                index_of_startline] and index % 2 == 1:
+
+                    if index_of_start_lines_with_first_element_of_element_blocks[index_of_startline] <= index <= index_of_end_lines_with_last_element_of_element_blocks[index_of_startline]:
                         element_info_line_1 = self.lines[index].split()
                         element_info_line_2 = self.lines[index + 1].split()
+                        try:
+                            number = element_info_line_1[10]
+                            node_01 = element_info_line_1[11]
+                            node_02 = element_info_line_1[12]
+                            node_03 = element_info_line_1[13]
+                            node_04 = element_info_line_1[14]
+                            node_05 = element_info_line_1[15]
+                            node_06 = element_info_line_1[16]
+                            node_07 = element_info_line_1[17]
+                            node_08 = element_info_line_1[18]
 
-                        number = element_info_line_1[10]
-                        node_01 = element_info_line_1[11]
-                        node_02 = element_info_line_1[12]
-                        node_03 = element_info_line_1[13]
-                        node_04 = element_info_line_1[14]
-                        node_05 = element_info_line_1[15]
-                        node_06 = element_info_line_1[16]
-                        node_07 = element_info_line_1[17]
-                        node_08 = element_info_line_1[18]
+                            node_09 = element_info_line_2[0]
+                            node_10 = element_info_line_2[1]
 
-                        node_09 = element_info_line_2[0]
-                        node_10 = element_info_line_2[1]
+                            self.elements["TET10"].append(
+                                ElementTET10(number, node_01, node_02, node_03, node_04, node_05,
+                                             node_06, node_07, node_08, node_09, node_10)
+                            )
 
-                        self.elements["TET10"].append(
-                            ElementTET10(number, node_01, node_02, node_03, node_04, node_05,
-                                         node_06, node_07, node_08, node_09, node_10)
-                        )
+                        except IndexError:
+                            pass
+
+
 
             # TRIA6
             if int(element_type) == 154:
@@ -131,8 +135,8 @@ class Mesh:
         ###########################################################################################################
         for index, line in enumerate(self.lines):
             if "CMBLOCK" in line:
-                print(f"line: {line}")
-                print(f"set node name: {line.split(',')[1]}")
+                # print(f"line: {line}")
+                # print(f"set node name: {line.split(',')[1]}")
 
                 index_of_start_lines_with_first_nodes_of_set_nodes.append(index + 2)
                 self.set_nodes.append(SetNode(line.split(',')[1]))
@@ -160,11 +164,11 @@ class Mesh:
                 if index_of_start_lines_with_first_nodes_of_set_nodes[index_of_startline] <= index <= \
                         index_of_end_lines_with_last_nodes_of_set_nodes[index_of_startline]:
 
-                    print(f"line: {line}")
-                    print(f"line.split(): {line.split()}")
+                    #print(f"line: {line}")
+                    #print(f"line.split(): {line.split()}")
 
                     for node in line.split():
-                        print(f"node: {int(node)}")
+                        #print(f"node: {int(node)}")
                         self.set_nodes[index_of_startline].add_node(int(node))
 
         for set in self.set_nodes:
@@ -177,12 +181,12 @@ class Mesh:
         ###########################################################################################################
         for index, line in enumerate(self.lines):
             if "Define Pressure Using Surface Effect Elements" in line:
-                print(f"line: {line}")
+                #print(f"line: {line}")
                 index_of_start_lines_with_first_element_of_set_elements.append(index + 4)
                 self.set_elements.append(SetElement("pressure"))
 
             if line[0:2] == "-1" and len(index_of_start_lines_with_first_element_of_set_elements) > 0:
-                print(f"line: {line}")
+                #print(f"line: {line}")
                 index_of_end_lines_with_last_element_of_set_elements.append(index - 1)
 
         for set in self.set_elements:
@@ -204,15 +208,14 @@ class Mesh:
 
                 if index_of_start_lines_with_first_element_of_set_elements[index_of_startline] <= index <= \
                         index_of_end_lines_with_last_element_of_set_elements[index_of_startline]:
-                    print(f"line: {line}")
-                    print(f"line.split(): {line.split()}")
-                    print(f"line.split()[0]: {line.split()[0]}")
-                    print(f"index_of_startline: {index_of_startline}")
-                    print(self.set_elements)
+                    # print(f"line: {line}")
+                    # print(f"line.split(): {line.split()}")
+                    # print(f"line.split()[0]: {line.split()[0]}")
+                    # print(f"index_of_startline: {index_of_startline}")
+                    # print(self.set_elements)
                     self.set_elements[index_of_startline].add_element(line.split()[0])
 
-        for set in self.set_elements:
-            print(f"set name from set element object: {set.get_element_set()}")
+
 
     def write_header(self):
         with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
@@ -235,14 +238,18 @@ class Mesh:
         with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
 
             file.writelines(" TETRA10\n")
+
             for element in self.elements["TET10"]:
+                # print(element.get_element_definition())
                 file.writelines(" ")
                 for index, item in enumerate(element.get_element_definition()):
+                    # print(f"item: {item}")
                     file.writelines(item + "   ")
                     if index == element.get_possible_items_per_line() - 1:
                         file.writelines("\n")
                         file.writelines("   ")
                 file.writelines("\n")
+
             file.writelines(" FINSF\n")
 
             file.writelines(" TRIA6\n")

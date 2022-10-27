@@ -1,6 +1,6 @@
 DEBUT(LANG='EN')
 
-mesh = LIRE_MAILLAGE(FORMAT='MED', UNITE=20)
+mesh = LIRE_MAILLAGE(FORMAT='ASTER', UNITE=20)
 
 model = AFFE_MODELE(MAILLAGE=mesh,
                     AFFE=_F(MODELISATION=('3D',),
@@ -10,7 +10,7 @@ model = AFFE_MODELE(MAILLAGE=mesh,
                     )
 
 steel = DEFI_MATERIAU(ELAS=_F(E=200000.0,
-                              NU=0.2,
+                              NU=0.3,
                               RHO=7.8e-09
                               )
                       )
@@ -25,7 +25,7 @@ load = AFFE_CHAR_MECA(MODELE=model,
                       DDL_IMPO=_F(DX=0.0,
                                   DY=0.0,
                                   DZ=0.0,
-                                  GROUP_NO=('fixed',)
+                                  GROUP_NO=('DISPZEROUX',)
                                   ),
                       PRES_REP=_F(
                           GROUP_MA=('pressure', ),

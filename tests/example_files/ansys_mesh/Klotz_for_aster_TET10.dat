@@ -196,34 +196,29 @@ _ASMDIAG=(_xmax-_xmin)*(_xmax-_xmin)+(_ymax-_ymin)*(_ymax-_ymin)+(_zmax-_zmin)*(
 _ASMDIAG=SQRT(_ASMDIAG)
 /wb,contact,start          !  starting to send contact
 /wb,contact,end            !  done creating contacts
-/com,*********** Send Named Selection as Node Component ***********
-CMBLOCK,FLAECHE_777,NODE,       15
-(8i10)
-         2         4         7         8         9        10        23        25
-        35        36        44        45        46        48        51
 /golist
 /wb,load,start             !  starting to send loads
 /com,******* Constant Zero Displacement X *******
 CMBLOCK,_DISPZEROUX,NODE,       15
 (8i10)
-         2         4         7         8         9        10        23        25
-        35        36        44        45        46        48        51
+         7         9        11        12        13        14        45        47
+        52        53        57        58        59        61        64
 cmsel,s,_DISPZEROUX
 d,all,ux,0
 nsel,all
 /com,******* Constant Zero Displacement Y *******
 CMBLOCK,_DISPZEROUY,NODE,       15
 (8i10)
-         2         4         7         8         9        10        23        25
-        35        36        44        45        46        48        51
+         7         9        11        12        13        14        45        47
+        52        53        57        58        59        61        64
 cmsel,s,_DISPZEROUY
 d,all,uy,0
 nsel,all
 /com,******* Constant Zero Displacement Z *******
 CMBLOCK,_DISPZEROUZ,NODE,       15
 (8i10)
-         2         4         7         8         9        10        23        25
-        35        36        44        45        46        48        51
+         7         9        11        12        13        14        45        47
+        52        53        57        58        59        61        64
 cmsel,s,_DISPZEROUZ
 d,all,uz,0
 nsel,all
