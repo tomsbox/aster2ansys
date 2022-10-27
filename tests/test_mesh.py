@@ -13,4 +13,5 @@ class MeshTest(unittest.TestCase):
         mesh = Mesh(file, "out.mail")
         mesh.write_nodes()
         mesh.write_elements()
+        mesh.write_set_node()
         self.assertTrue(True)

@@ -1,6 +1,7 @@
 from pathlib import Path
 from .node import Node
 from .element import ElementTET10, ElementTRIA6
+from .set_node import SetNode
 
 
 class Mesh:
@@ -14,10 +15,11 @@ class Mesh:
         self.lines = ""
         self.nodes = []
         self.elements = {"TET10": [], "TRIA6": []}
-
+        self.set_nodes = []
         self.read_file()
         self.read_nodes()
         self.read_elements()
+        self.read_sets_node()
 
     def read_file(self):
         with open(self.file_with_path, "r") as file:
@@ -79,9 +81,7 @@ class Mesh:
                             index_of_end_lines_with_last_element_of_element_blocks[
                                 index_of_startline] and index % 2 == 1:
                         element_info_line_1 = self.lines[index].split()
-                        print(f"element_info_line_1: {element_info_line_1}")
                         element_info_line_2 = self.lines[index + 1].split()
-                        print(f"element_info_line_2: {element_info_line_2}")
 
                         number = element_info_line_1[10]
                         node_01 = element_info_line_1[11]
@@ -103,9 +103,6 @@ class Mesh:
 
             # TRIA6
             if int(element_type) == 154:
-                print("TRIA6")
-                print(index_of_start_lines_with_first_element_of_element_blocks[index_of_startline])
-                print(index_of_end_lines_with_last_element_of_element_blocks[index_of_startline])
                 for index, line in enumerate(self.lines):
                     if index_of_start_lines_with_first_element_of_element_blocks[index_of_startline] <= index <= \
                             index_of_end_lines_with_last_element_of_element_blocks[index_of_startline]:
@@ -122,11 +119,56 @@ class Mesh:
                             ElementTRIA6(number, node_01, node_02, node_03, node_04, node_05, node_06)
                         )
 
+    def read_sets_node(self):
+        index_of_start_lines_with_first_nodes_of_set_nodes = []
+        index_of_end_lines_with_last_nodes_of_set_nodes = []
+
+        ###########################################################################################################
+        for index, line in enumerate(self.lines):
+            if "CMBLOCK" in line:
+                print(f"line: {line}")
+                print(f"set node name: {line.split(',')[1]}")
+
+                index_of_start_lines_with_first_nodes_of_set_nodes.append(index + 2)
+                self.set_nodes.append(SetNode(line.split(',')[1]))
+
+            if ("golist" in line or "cmsel" in line) and len(index_of_start_lines_with_first_nodes_of_set_nodes) > 0:
+                index_of_end_lines_with_last_nodes_of_set_nodes.append(index - 1)
+
+        for set in self.set_nodes:
+            print(f"set name from set note object: {set.get_set_node_name()}")
+
+        print(
+            f"index_of_start_lines_with_first_nodes_of_set_nodes: {index_of_start_lines_with_first_nodes_of_set_nodes}")
+        print(
+            f"index_of_end_lines_with_last_nodes_of_set_nodes: {index_of_end_lines_with_last_nodes_of_set_nodes}")
+        ###########################################################################################################
+
+        for index_of_startline, dummy in enumerate(index_of_start_lines_with_first_nodes_of_set_nodes):
+
+            print(f"index_of_startline: {index_of_startline}")
+            print(index_of_start_lines_with_first_nodes_of_set_nodes[index_of_startline])
+            print(index_of_end_lines_with_last_nodes_of_set_nodes[index_of_startline])
+
+            for index, line in enumerate(self.lines):
+
+                if index_of_start_lines_with_first_nodes_of_set_nodes[index_of_startline] <= index <= \
+                        index_of_end_lines_with_last_nodes_of_set_nodes[index_of_startline]:
+
+                    print(f"line: {line}")
+                    print(f"line.split(): {line.split()}")
+
+                    for node in line.split():
+                        print(f"node: {int(node)}")
+                        self.set_nodes[index_of_startline].add_node(int(node))
+
+        for set in self.set_nodes:
+            print(f"set name from set note object: {set.get_node_set()}")
+
     def write_elements(self):
         with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
 
             for element in self.elements["TET10"]:
-                print(f"element: {element}")
                 file.writelines(" ")
                 for index, item in enumerate(element.get_element_definition()):
                     file.writelines(item + "   ")
@@ -136,9 +178,18 @@ class Mesh:
                 file.writelines("\n")
 
             for element in self.elements["TRIA6"]:
-                print(f"element: {element}")
                 file.writelines(" ")
                 for index, item in enumerate(element.get_element_definition()):
                     file.writelines(item)
                     file.writelines("   ")
                 file.writelines("\n")
+
+    def write_set_node(self):
+        with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
+            for set_node in self.set_nodes:
+                file.writelines(" ")
+                for index, item in enumerate(set_node.get_node_set()["nodes"]):
+                    file.writelines("N" + str(item) + "   ")
+                    if index == set_node.get_possible_items_per_line() - 1:
+                        file.writelines("\n")
+                        file.writelines(" ")
