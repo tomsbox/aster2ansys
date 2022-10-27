@@ -11,7 +11,9 @@ class MeshTest(unittest.TestCase):
         print(f"oooooooooooooooooooooo")
         file = current_path / "example_files/ansys_mesh/Klotz_for_aster_TET10.dat"
         mesh = Mesh(file, "out.mail")
+        mesh.write_header()
         mesh.write_nodes()
         mesh.write_elements()
         mesh.write_set_node()
+        mesh.write_footer()
         self.assertTrue(True)

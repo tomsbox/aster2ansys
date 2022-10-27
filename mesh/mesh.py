@@ -25,6 +25,16 @@ class Mesh:
         with open(self.file_with_path, "r") as file:
             self.lines = file.readlines()
 
+    def write_header(self):
+        with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
+            file.writelines(" TITRE\n")
+            file.writelines(" %  Hand made mesh from ansys\n")
+            file.writelines(" FINSF\n")
+
+    def write_footer(self):
+        with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
+            file.writelines(" FIN\n")
+
     def read_nodes(self):
         index_start_line_nodes = None
         index_end_line_nodes = None
@@ -44,8 +54,10 @@ class Mesh:
 
     def write_nodes(self):
         with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
+            file.writelines(" COOR_3D\n")
             for node in self.nodes:
                 file.writelines(node.get_node_definition() + "\n")
+            file.writelines(" FINSF\n")
 
     def read_elements(self):
 
@@ -168,6 +180,7 @@ class Mesh:
     def write_elements(self):
         with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
 
+            file.writelines(" TETRA10\n")
             for element in self.elements["TET10"]:
                 file.writelines(" ")
                 for index, item in enumerate(element.get_element_definition()):
@@ -176,21 +189,27 @@ class Mesh:
                         file.writelines("\n")
                         file.writelines("   ")
                 file.writelines("\n")
+            file.writelines(" FINSF\n")
 
+            file.writelines(" TRIA6\n")
             for element in self.elements["TRIA6"]:
                 file.writelines(" ")
                 for index, item in enumerate(element.get_element_definition()):
                     file.writelines(item)
                     file.writelines("   ")
                 file.writelines("\n")
+            file.writelines(" FINSF\n")
 
     def write_set_node(self):
         with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
             for set_node in self.set_nodes:
+                file.writelines(" GROUP_NO\n")
                 file.writelines(" " + set_node.get_node_set()["name"] + "\n")
                 file.writelines(" ")
                 for index, item in enumerate(set_node.get_node_set()["nodes"]):
                     file.writelines("N" + str(item) + "   ")
-                    if index == set_node.get_possible_items_per_line() - 1:
+                    if index != 0 and index % set_node.get_possible_items_per_line() == 0:
                         file.writelines("\n")
                         file.writelines(" ")
+                file.writelines("\n")
+                file.writelines(" FINSF\n")
