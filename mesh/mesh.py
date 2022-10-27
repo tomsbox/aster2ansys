@@ -2,6 +2,14 @@ from pathlib import Path
 from .node import Node
 from .element import ElementTET10, ElementTRIA6
 from .set_node import SetNode
+from .set_element import SetElement
+
+
+def remove_underscore_as_first_char_in_group_names(name):
+    if name[0] == "_":
+        return name[1:]
+    else:
+        return name
 
 
 class Mesh:
@@ -16,24 +24,16 @@ class Mesh:
         self.nodes = []
         self.elements = {"TET10": [], "TRIA6": []}
         self.set_nodes = []
+        self.set_elements = []
         self.read_file()
         self.read_nodes()
         self.read_elements()
         self.read_sets_node()
+        self.read_sets_element()
 
     def read_file(self):
         with open(self.file_with_path, "r") as file:
             self.lines = file.readlines()
-
-    def write_header(self):
-        with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
-            file.writelines(" TITRE\n")
-            file.writelines(" %  Hand made mesh from ansys\n")
-            file.writelines(" FINSF\n")
-
-    def write_footer(self):
-        with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
-            file.writelines(" FIN\n")
 
     def read_nodes(self):
         index_start_line_nodes = None
@@ -51,13 +51,6 @@ class Mesh:
             if index >= index_start_line_nodes and index <= index_end_line_nodes:
                 node_info = line.split()
                 self.nodes.append(Node(node_info[0], node_info[1], node_info[2], node_info[3]))
-
-    def write_nodes(self):
-        with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
-            file.writelines(" COOR_3D\n")
-            for node in self.nodes:
-                file.writelines(node.get_node_definition() + "\n")
-            file.writelines(" FINSF\n")
 
     def read_elements(self):
 
@@ -177,6 +170,67 @@ class Mesh:
         for set in self.set_nodes:
             print(f"set name from set note object: {set.get_node_set()}")
 
+    def read_sets_element(self):
+        index_of_start_lines_with_first_element_of_set_elements = []
+        index_of_end_lines_with_last_element_of_set_elements = []
+
+        ###########################################################################################################
+        for index, line in enumerate(self.lines):
+            if "Define Pressure Using Surface Effect Elements" in line:
+                print(f"line: {line}")
+                index_of_start_lines_with_first_element_of_set_elements.append(index + 4)
+                self.set_elements.append(SetElement("pressure"))
+
+            if line[0:2] == "-1" and len(index_of_start_lines_with_first_element_of_set_elements) > 0:
+                print(f"line: {line}")
+                index_of_end_lines_with_last_element_of_set_elements.append(index - 1)
+
+        for set in self.set_elements:
+            print(f"set name from set element object: {set.get_set_element_name()}")
+
+        print(
+            f"index_of_start_lines_with_first_element_of_set_elements: {index_of_start_lines_with_first_element_of_set_elements}")
+        print(
+            f"index_of_end_lines_with_last_element_of_set_elements: {index_of_end_lines_with_last_element_of_set_elements}")
+        ###########################################################################################################
+
+        for index_of_startline, dummy in enumerate(index_of_start_lines_with_first_element_of_set_elements):
+
+            print(f"index_of_startline: {index_of_startline}")
+            print(index_of_start_lines_with_first_element_of_set_elements[index_of_startline])
+            print(index_of_end_lines_with_last_element_of_set_elements[index_of_startline])
+
+            for index, line in enumerate(self.lines):
+
+                if index_of_start_lines_with_first_element_of_set_elements[index_of_startline] <= index <= \
+                        index_of_end_lines_with_last_element_of_set_elements[index_of_startline]:
+                    print(f"line: {line}")
+                    print(f"line.split(): {line.split()}")
+                    print(f"line.split()[0]: {line.split()[0]}")
+                    print(f"index_of_startline: {index_of_startline}")
+                    print(self.set_elements)
+                    self.set_elements[index_of_startline].add_element(line.split()[0])
+
+        for set in self.set_elements:
+            print(f"set name from set element object: {set.get_element_set()}")
+
+    def write_header(self):
+        with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
+            file.writelines(" TITRE\n")
+            file.writelines(" %  Hand made mesh from ansys\n")
+            file.writelines(" FINSF\n")
+
+    def write_footer(self):
+        with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
+            file.writelines(" FIN\n")
+
+    def write_nodes(self):
+        with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
+            file.writelines(" COOR_3D\n")
+            for node in self.nodes:
+                file.writelines(node.get_node_definition() + "\n")
+            file.writelines(" FINSF\n")
+
     def write_elements(self):
         with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
 
@@ -204,11 +258,25 @@ class Mesh:
         with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
             for set_node in self.set_nodes:
                 file.writelines(" GROUP_NO\n")
-                file.writelines(" " + set_node.get_node_set()["name"] + "\n")
+                file.writelines(" " + remove_underscore_as_first_char_in_group_names(set_node.get_node_set()["name"]) + "\n")
                 file.writelines(" ")
                 for index, item in enumerate(set_node.get_node_set()["nodes"]):
                     file.writelines("N" + str(item) + "   ")
                     if index != 0 and index % set_node.get_possible_items_per_line() == 0:
+                        file.writelines("\n")
+                        file.writelines(" ")
+                file.writelines("\n")
+                file.writelines(" FINSF\n")
+
+    def write_set_elements(self):
+        with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
+            for set_element in self.set_elements:
+                file.writelines(" GROUP_MA\n")
+                file.writelines(" " + remove_underscore_as_first_char_in_group_names(set_element.get_element_set()["name"]) + "\n")
+                file.writelines(" ")
+                for index, item in enumerate(set_element.get_element_set()["elements"]):
+                    file.writelines("M" + str(item) + "   ")
+                    if index != 0 and index % set_element.get_possible_items_per_line() == 0:
                         file.writelines("\n")
                         file.writelines(" ")
                 file.writelines("\n")

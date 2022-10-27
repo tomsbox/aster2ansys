@@ -15,5 +15,6 @@ class MeshTest(unittest.TestCase):
         mesh.write_nodes()
         mesh.write_elements()
         mesh.write_set_node()
+        mesh.write_set_elements()
         mesh.write_footer()
         self.assertTrue(True)
