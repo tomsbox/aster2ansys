@@ -269,7 +269,7 @@ rescontrol,,none                 ! Do not keep any restart files
 /com,******************* SOLVE FOR LS 1 OF 1 ****************
 esel,s,type,,2
 nsle
-sf,all,pres,1.
+sf,all,pres,8.
 nsel,all
 esel,all
 esel,all

@@ -12,7 +12,7 @@ A args -max_base 100000
 A memjeveux 600
 A tpmax 36000
 F comm /home/aster/shared/calculate_pressure.comm D  1
-F mmed /home/aster/shared/Klotz_for_aster_TET10_0p5mm.mail D  20
+F mmed /home/aster/shared/Klotz_for_aster_TET10_0p05mm.mail D  20
 F mess /home/aster/shared/calculate_pressure.mess R  6
 F mess /home/aster/shared/calculate_pressure.resu R  8
-F rmed /home/aster/shared/Klotz_for_aster_TET10_0p5mm.rmed R  80
+F rmed /home/aster/shared/Klotz_for_aster_TET10_0p05mm.rmed R  80
