@@ -9,8 +9,8 @@ class MeshTest(unittest.TestCase):
     def test_mesh_reader(self):
         print(f"current_path: {current_path}")
         print(f"oooooooooooooooooooooo")
-        file = current_path / "example_files/ansys_mesh/Klotz_for_aster_TET10_0p05mm.dat"
-        mesh = Mesh(file, "Klotz_for_aster_TET10_0p05mm.mail")
+        file = current_path / "example_files/ansys_mesh/Klotz_for_aster_TET10_0p1mm.dat"
+        mesh = Mesh(file, "Klotz_for_aster_TET10_1mm.mail")
         mesh.write_header()
         mesh.write_nodes()
         mesh.write_elements()
