@@ -13,3 +13,4 @@
 /docker_volume/*.resu
 /tests/example_files/ansys_mesh/Klotz_for_aster_TET10_0p05mm.*
 /tests/example_files/ansys_mesh/Klotz_for_aster_TET10_0p1mm.*
+/local_settings.txt
