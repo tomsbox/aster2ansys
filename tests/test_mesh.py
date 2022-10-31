@@ -6,7 +6,7 @@ import filecmp
 current_path = Path(__file__).parent.resolve()
 
 
-class ReadAndWriteMeshCompleteProcessTest(unittest.TestCase):
+class MeshTest(unittest.TestCase):
 
     def setUp(self):
         self.file_name = 'Klotz_for_aster_TET10_0p5mm'
@@ -14,7 +14,7 @@ class ReadAndWriteMeshCompleteProcessTest(unittest.TestCase):
         self.result_file = current_path / "example_files/ansys_mesh" / (self.file_name + ".mail")
         self.result_file_reference = current_path / "example_files/ansys_mesh" / (self.file_name + "_reference.mail")
 
-    def test_mesh_reader(self):
+    def test_read_ansys_mesh_and_write_aster_mesh_complete_process(self):
         # read the ansys mesh
         mesh = Mesh(self.file, self.file_name + ".mail")
         #write the aster mesh
