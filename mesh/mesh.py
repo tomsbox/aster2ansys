@@ -29,7 +29,7 @@ class Mesh:
         self.read_nodes()
         self.read_elements()
         self.read_sets_node()
-        self.read_sets_element()
+        self.read_sets_element_for_pressure()
 
     def read_file(self):
         with open(self.file_with_path, "r") as file:
@@ -174,7 +174,7 @@ class Mesh:
         for set in self.set_nodes:
             print(f"set name from set note object: {set.get_node_set()}")
 
-    def read_sets_element(self):
+    def read_sets_element_for_pressure(self):
         index_of_start_lines_with_first_element_of_set_elements = []
         index_of_end_lines_with_last_element_of_set_elements = []
 
@@ -214,8 +214,6 @@ class Mesh:
                     # print(f"index_of_startline: {index_of_startline}")
                     # print(self.set_elements)
                     self.set_elements[index_of_startline].add_element(line.split()[0])
-
-
 
     def write_header(self):
         with open(Path(self.file_with_path).parent.resolve() / self.output_file_name, "a") as file:
