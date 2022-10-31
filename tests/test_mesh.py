@@ -17,7 +17,7 @@ class MeshTest(unittest.TestCase):
     def test_read_ansys_mesh_and_write_aster_mesh_complete_process(self):
         # read the ansys mesh
         mesh = Mesh(self.file, self.file_name + ".mail")
-        #write the aster mesh
+        # write the aster mesh
         mesh.write_header()
         mesh.write_nodes()
         mesh.write_elements()
