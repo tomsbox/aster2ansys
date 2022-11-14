@@ -1,16 +1,7 @@
 .idea
 .venv
-/docker_volume/druckbauteil.comm
-/docker_volume/druckbauteil.export
-/docker_volume/druckbauteil.med
-/docker_volume/druckbauteil.mess
-/docker_volume/druckbauteil.resu
-/docker_volume/druckbauteil.rmed
 .rmed
-/docker_volume/Klotz_for_aster_TET10_0p05mm.*
-/docker_volume/Klotz_for_aster_TET10_0p1mm.*
 /docker_volume/*.mess
 /docker_volume/*.resu
-/tests/example_files/ansys_mesh/Klotz_for_aster_TET10_0p05mm.*
-/tests/example_files/ansys_mesh/Klotz_for_aster_TET10_0p1mm.*
+/docker_volume/*.rmed
 /local_settings.txt
