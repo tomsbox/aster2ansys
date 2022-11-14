@@ -1,0 +1,18 @@
+P actions make_etude
+P memory_limit 256.0
+P mode interactif
+P mpi_nbcpu 1
+P mpi_nbnoeud 1
+P ncpus 1
+P testlist verification sequential
+P time_limit 60.0
+P version testing
+P memjob 3072000
+P tpsjob 2880
+A memjeveux 375.0
+A tpmax 172800
+F comm /home/aster/shared/contact.comm D  1
+F mail /home/aster/shared/contact.mail D  20
+F mess /home/aster/shared/contact.mess R  6
+F resu /home/aster/shared/contact.resu R  8
+F rmed /home/aster/shared/contact.rmed R  80
